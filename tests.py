@@ -107,7 +107,8 @@ class TestVialBoard(unittest.TestCase):
         self.vial_2 = obj.Vial(3)
         self.vial_3 = obj.Vial(5, [1, 2])
         self.vial_4 = obj.Vial(3, [1, 1])
-        self.vial_board = obj.VialBoard([self.vial_1, self.vial_2, self.vial_4])
+        self.vial_5 = obj.Vial(3, [10])
+        self.vial_board = obj.VialBoard([self.vial_1, self.vial_2, self.vial_4, self.vial_5])
 
     def test_init(self):
         self.assertIsInstance(self.vial_board, obj.VialBoard)
@@ -130,6 +131,9 @@ class TestVialBoard(unittest.TestCase):
         self.vial_board.move(2, 1)
         self.assertEqual(self.vial_board[2], [])
         self.assertEqual(self.vial_board[1], [1, 1])
+
+    def test_print(self):
+        print(self.vial_board)
 
 
 if __name__ == '__main__':

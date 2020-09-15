@@ -41,6 +41,18 @@ class VialBoard(UserList):
         check_board_arguments_meet_requirements(vial_list)
         super().__init__(vial_list)
 
+    def __str__(self):
+        result = ''
+        size = self[0].max_size
+        for line in range(size - 1, -1, -1):
+            for vial in self:
+                if len(vial) > line:
+                    result += f'|{vial[line]:->3}|'
+                else:
+                    result += f'|---|'
+            result += '\n'
+        return result
+
     def move(self, donor_index, recipient_index):
         while self.__can_move(self[donor_index], self[recipient_index]):
             item = self[donor_index].pop()
