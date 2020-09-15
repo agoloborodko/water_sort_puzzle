@@ -40,3 +40,11 @@ class VialBoard(UserList):
     def __init__(self, vial_size, initlist=None):
         super().__init__(initlist)
         self.vial_size = vial_size
+
+
+def check_board_arguments_meet_requirements(vial_list):
+    assert len(vial_list) > 1, 'VialBoard should contain at least 2 Vials!'
+    first_vial = vial_list[0]
+    for i in vial_list:
+        assert isinstance(i, Vial), 'VialBoard elements all must be instances of Vial class!'
+        assert first_vial.max_size == i.max_size

@@ -73,11 +73,31 @@ class TestGameObjectsFunctions(unittest.TestCase):
     def test_check_vial_arguments_meet_requirements(self):
         with self.assertRaises(AssertionError):
             obj.check_vial_arguments_meet_requirements(0, [])
+        with self.assertRaises(AssertionError):
             obj.check_vial_arguments_meet_requirements(-1, [])
+        with self.assertRaises(AssertionError):
             obj.check_vial_arguments_meet_requirements(2, [1, 2, 3])
 
         obj.check_vial_arguments_meet_requirements(3, [1, 2, 3])
         obj.check_vial_arguments_meet_requirements(5, None)
+
+    def test_check_board_arguments_meet_requirements(self):
+        vial_1 = obj.Vial(3, [1, 2, 3])
+        vial_2 = obj.Vial(3)
+        vial_3 = obj.Vial(5, [1, 2])
+
+        obj.check_board_arguments_meet_requirements([vial_1, vial_2])
+
+        with self.assertRaises(AssertionError):
+            obj.check_board_arguments_meet_requirements([vial_1, vial_2, vial_3])
+        with self.assertRaises(AssertionError):
+            obj.check_board_arguments_meet_requirements([vial_1])
+        with self.assertRaises(AssertionError):
+            obj.check_board_arguments_meet_requirements([vial_1, 5])
+        with self.assertRaises(AssertionError):
+            obj.check_board_arguments_meet_requirements([])
+        with self.assertRaises(AssertionError):
+            obj.check_board_arguments_meet_requirements([1, 2, 2])
 
 
 class TestVialBoard(unittest.TestCase):
