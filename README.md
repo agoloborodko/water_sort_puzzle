@@ -1,3 +1,5 @@
+_python 3.8.2_
+
 # water_sort_puzzle
 This app solves a puzzle I found in mobile game called "Water Sort Puzzle".
 
