@@ -10,4 +10,4 @@ You start with several vials that contains colored water and some (one or two) e
 In one step you can move only water that's on the top of vial. You can put this water only to the same colour or to the empty vial. If donor vial contains several layers of water of one color, all the layers will be moved to destination vial until it's full.
 
 ## Game screenshot
-https://trashbox.ru/ifiles/1276117_68a904_screenshot_02.png-orig/water-sort-puzzle-android-8.jpg
+![It's supposed to be a screenshot here](https://github.com/agoloborodko/water_sort_puzzle/docs_content/game_screenshot.png?raw=true)
