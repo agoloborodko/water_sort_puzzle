@@ -1,5 +1,5 @@
 from collections import UserList
-
+from exceptions import VialCannotAcceptThisException
 
 class Vial(UserList):
 
@@ -9,13 +9,21 @@ class Vial(UserList):
         super().__init__(initlist)
         self.max_size = max_size
 
-    def is_appendable(self, elem):
+    def is_appendable(self, item):
         if len(self.data) < self.max_size:
             if len(self.data) == 0:
                 return True
-            elif elem == self.data[-1]:
+            elif item == self.data[-1]:
                 return True
         return False
+
+    def __raise_exception_if_not_appendable(self, item):
+        if not self.is_appendable(item):
+            raise VialCannotAcceptThisException(f'Item {item} cannot be put in vial {self}')
+
+    def append(self, item):
+        self.__raise_exception_if_not_appendable(item)
+        super().append(item)
 
 
 def check_vial_arguments_meet_requirements(max_size, initlist):

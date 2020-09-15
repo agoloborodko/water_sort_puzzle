@@ -1,5 +1,6 @@
 import unittest
 import game_objects as obj
+import exceptions as ex
 
 
 class TestVial(unittest.TestCase):
@@ -36,6 +37,25 @@ class TestVial(unittest.TestCase):
         vial_3 = obj.Vial(2, [0])
         self.assertFalse(vial_3.is_appendable(1))
         self.assertTrue(vial_3.is_appendable(0))
+
+    def test_append(self):
+        vial_1 = obj.Vial(2)
+        vial_1.append(1)
+        self.assertEqual(vial_1, [1])
+
+        with self.assertRaises(ex.VialCannotAcceptThisException):
+            vial_1.append(2)
+
+        vial_1.append(1)
+        self.assertEqual(vial_1, [1, 1])
+
+        vial_2 = obj.Vial(2, [1])
+        with self.assertRaises(ex.VialCannotAcceptThisException):
+            vial_2.append(2)
+
+        vial_3 = obj.Vial(2, [1, 1])
+        with self.assertRaises(ex.VialCannotAcceptThisException):
+            vial_3.append(1)
 
 
 class TestGameObjectsFunctions(unittest.TestCase):
