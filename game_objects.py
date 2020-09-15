@@ -44,7 +44,7 @@ class VialBoard(UserList):
     def __str__(self):
         result = ''
         size = self[0].max_size
-        for line in range(size - 1, -1, -1):
+        for line in range(size-1, -1, -1):
             for vial in self:
                 if len(vial) > line:
                     result += f'|{vial[line]:->3}|'
