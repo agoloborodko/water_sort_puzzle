@@ -33,3 +33,10 @@ def check_vial_arguments_meet_requirements(max_size, initlist):
 
     if initlist is not None:
         assert len(initlist) <= max_size, 'initlist size cannot be greater than max_size!'
+
+
+class VialBoard(UserList):
+
+    def __init__(self, vial_size, initlist=None):
+        super().__init__(initlist)
+        self.vial_size = vial_size

@@ -80,5 +80,13 @@ class TestGameObjectsFunctions(unittest.TestCase):
         obj.check_vial_arguments_meet_requirements(5, None)
 
 
+class TestVialBoard(unittest.TestCase):
+
+    def test_init(self):
+        vial_board = obj.VialBoard(5)
+        self.assertIsInstance(vial_board, obj.VialBoard)
+        self.assertEqual(vial_board.vial_size, 5)
+
+
 if __name__ == '__main__':
     unittest.main()
