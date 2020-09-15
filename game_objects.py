@@ -80,6 +80,9 @@ class VialBoard(UserList):
             item = self[donor_index].pop()
             self[recipient_index].append(item)
 
+    # TODO: method "solved"
+    # TODO: add a way to memorize path, do step-backs and return to start
+
 
 def check_board_arguments_meet_requirements(vial_list):
     assert len(vial_list) > 1, 'VialBoard should contain at least 2 Vials!'
