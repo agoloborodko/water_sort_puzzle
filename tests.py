@@ -16,8 +16,14 @@ class TestVial(unittest.TestCase):
 
         with self.assertRaises(AssertionError):
             obj.Vial(2, [1, 2, 3])
+        with self.assertRaises(AssertionError):
             obj.Vial(0, [1, 2, 3])
+        with self.assertRaises(AssertionError):
             obj.Vial(0)
+        with self.assertRaises(AssertionError):
+            obj.Vial(4.5, [5])
+        with self.assertRaises(TypeError):
+            obj.Vial(4, 5)
 
 
 class TestGameObjectsFunctions(unittest.TestCase):

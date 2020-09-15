@@ -11,6 +11,8 @@ class Vial(UserList):
 
 
 def check_vial_arguments_meet_requirements(max_size, initlist):
-    assert max_size > 0
+    assert max_size > 0, 'max_size must be greater than zero!'
+    assert isinstance(max_size, int), 'max_size must be integer!'
+
     if initlist is not None:
-        assert len(initlist) <= max_size
+        assert len(initlist) <= max_size, 'initlist size cannot be greater than max_size!'
