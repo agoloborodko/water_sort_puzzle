@@ -20,5 +20,17 @@ class TestVial(unittest.TestCase):
             obj.Vial(0)
 
 
+class TestGameObjectsFunctions(unittest.TestCase):
+
+    def test_check_vial_arguments_meet_requirements(self):
+        with self.assertRaises(AssertionError):
+            obj.check_vial_arguments_meet_requirements(0, [])
+            obj.check_vial_arguments_meet_requirements(-1, [])
+            obj.check_vial_arguments_meet_requirements(2, [1, 2, 3])
+
+        obj.check_vial_arguments_meet_requirements(3, [1, 2, 3])
+        obj.check_vial_arguments_meet_requirements(5, None)
+
+
 if __name__ == '__main__':
     unittest.main()
