@@ -38,6 +38,7 @@ def check_vial_arguments_meet_requirements(max_size, initlist):
 class VialBoard(UserList):
 
     def __init__(self, vial_list):
+        vial_list = self.__make_vials_from_lists(vial_list)
         check_board_arguments_meet_requirements(vial_list)
         super().__init__(vial_list)
 
@@ -53,11 +54,6 @@ class VialBoard(UserList):
             result += '\n'
         return result
 
-    def move(self, donor_index, recipient_index):
-        while self.__can_move(self[donor_index], self[recipient_index]):
-            item = self[donor_index].pop()
-            self[recipient_index].append(item)
-
     @staticmethod
     def __can_move(donor_vial, recipient_vial):
         if len(donor_vial) == 0:
@@ -65,6 +61,24 @@ class VialBoard(UserList):
         elif recipient_vial.can_accept(donor_vial[-1]):
             return True
         return False
+
+    @staticmethod
+    def __make_vials_from_lists(input_list):
+        max_size = 2
+        result = []
+        for i in input_list:
+            assert isinstance(i, (Vial, list))
+            if len(i) > max_size:
+                max_size = len(i)
+        for i in input_list:
+            vial = Vial(max_size, i)
+            result.append(vial)
+        return result
+
+    def move(self, donor_index, recipient_index):
+        while self.__can_move(self[donor_index], self[recipient_index]):
+            item = self[donor_index].pop()
+            self[recipient_index].append(item)
 
 
 def check_board_arguments_meet_requirements(vial_list):

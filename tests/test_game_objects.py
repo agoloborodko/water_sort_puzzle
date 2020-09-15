@@ -26,6 +26,12 @@ class TestVial(unittest.TestCase):
         with self.assertRaises(TypeError):
             obj.Vial(4, 5)
 
+    def test_init_from_vial(self):
+        vial_1 = obj.Vial(4, [1, 2, 3])
+        vial_2 = obj.Vial(5, vial_1)
+        self.assertEqual(vial_1, vial_2)
+        self.assertEqual(5, vial_2.max_size)
+
     def test_is_appendable(self):
         vial_1 = obj.Vial(2)
         self.assertTrue(vial_1.can_accept(1))
@@ -113,8 +119,6 @@ class TestVialBoard(unittest.TestCase):
     def test_init(self):
         self.assertIsInstance(self.vial_board, obj.VialBoard)
 
-        with self.assertRaises(AssertionError):
-            obj.VialBoard([self.vial_1, self.vial_2, self.vial_3])
         with self.assertRaises(AssertionError):
             obj.VialBoard([1, 2, 3])
         with self.assertRaises(AssertionError):
