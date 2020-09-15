@@ -103,9 +103,21 @@ class TestGameObjectsFunctions(unittest.TestCase):
 class TestVialBoard(unittest.TestCase):
 
     def test_init(self):
-        vial_board = obj.VialBoard(5)
+        vial_1 = obj.Vial(3, [1, 2, 3])
+        vial_2 = obj.Vial(3)
+        vial_3 = obj.Vial(5, [1, 2])
+
+        vial_board = obj.VialBoard([vial_1, vial_2])
         self.assertIsInstance(vial_board, obj.VialBoard)
-        self.assertEqual(vial_board.vial_size, 5)
+
+        with self.assertRaises(AssertionError):
+            obj.VialBoard([vial_1, vial_2, vial_3])
+        with self.assertRaises(AssertionError):
+            obj.VialBoard([1, 2, 3])
+        with self.assertRaises(AssertionError):
+            obj.VialBoard([vial_2, 2, 3])
+        with self.assertRaises(AssertionError):
+            obj.VialBoard([vial_3])
 
 
 if __name__ == '__main__':

@@ -37,9 +37,9 @@ def check_vial_arguments_meet_requirements(max_size, initlist):
 
 class VialBoard(UserList):
 
-    def __init__(self, vial_size, initlist=None):
-        super().__init__(initlist)
-        self.vial_size = vial_size
+    def __init__(self, vial_list):
+        check_board_arguments_meet_requirements(vial_list)
+        super().__init__(vial_list)
 
 
 def check_board_arguments_meet_requirements(vial_list):
