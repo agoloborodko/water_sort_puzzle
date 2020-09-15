@@ -28,15 +28,15 @@ class TestVial(unittest.TestCase):
 
     def test_is_appendable(self):
         vial_1 = obj.Vial(2)
-        self.assertTrue(vial_1.is_appendable(1))
+        self.assertTrue(vial_1.can_accept(1))
 
         vial_2 = obj.Vial(1, [0])
-        self.assertFalse(vial_2.is_appendable(0))
-        self.assertFalse(vial_2.is_appendable(1))
+        self.assertFalse(vial_2.can_accept(0))
+        self.assertFalse(vial_2.can_accept(1))
 
         vial_3 = obj.Vial(2, [0])
-        self.assertFalse(vial_3.is_appendable(1))
-        self.assertTrue(vial_3.is_appendable(0))
+        self.assertFalse(vial_3.can_accept(1))
+        self.assertTrue(vial_3.can_accept(0))
 
     def test_append(self):
         vial_1 = obj.Vial(2)
@@ -102,22 +102,34 @@ class TestGameObjectsFunctions(unittest.TestCase):
 
 class TestVialBoard(unittest.TestCase):
 
-    def test_init(self):
-        vial_1 = obj.Vial(3, [1, 2, 3])
-        vial_2 = obj.Vial(3)
-        vial_3 = obj.Vial(5, [1, 2])
+    def setUp(self):
+        self.vial_1 = obj.Vial(3, [1, 2, 3])
+        self.vial_2 = obj.Vial(3)
+        self.vial_3 = obj.Vial(5, [1, 2])
+        self.vial_4 = obj.Vial(3, [1, 1])
+        self.vial_board = obj.VialBoard([self.vial_1, self.vial_2, self.vial_4])
 
-        vial_board = obj.VialBoard([vial_1, vial_2])
-        self.assertIsInstance(vial_board, obj.VialBoard)
+    def test_init(self):
+        self.assertIsInstance(self.vial_board, obj.VialBoard)
 
         with self.assertRaises(AssertionError):
-            obj.VialBoard([vial_1, vial_2, vial_3])
+            obj.VialBoard([self.vial_1, self.vial_2, self.vial_3])
         with self.assertRaises(AssertionError):
             obj.VialBoard([1, 2, 3])
         with self.assertRaises(AssertionError):
-            obj.VialBoard([vial_2, 2, 3])
+            obj.VialBoard([self.vial_2, 2, 3])
         with self.assertRaises(AssertionError):
-            obj.VialBoard([vial_3])
+            obj.VialBoard([self.vial_3])
+
+    def test_move(self):
+        self.vial_board.move(0, 1)
+        self.assertEqual(self.vial_board[0], [1, 2])
+        self.assertEqual(self.vial_board[1], [3])
+
+    def test_move_all(self):
+        self.vial_board.move(2, 1)
+        self.assertEqual(self.vial_board[2], [])
+        self.assertEqual(self.vial_board[1], [1, 1])
 
 
 if __name__ == '__main__':

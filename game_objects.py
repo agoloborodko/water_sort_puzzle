@@ -10,7 +10,7 @@ class Vial(UserList):
         super().__init__(initlist)
         self.max_size = max_size
 
-    def is_appendable(self, item):
+    def can_accept(self, item):
         if len(self.data) < self.max_size:
             if len(self.data) == 0:
                 return True
@@ -19,7 +19,7 @@ class Vial(UserList):
         return False
 
     def __raise_exception_if_not_appendable(self, item):
-        if not self.is_appendable(item):
+        if not self.can_accept(item):
             raise VialCannotAcceptThisException(f'Item {item} cannot be put in vial {self}')
 
     def append(self, item):
@@ -40,6 +40,19 @@ class VialBoard(UserList):
     def __init__(self, vial_list):
         check_board_arguments_meet_requirements(vial_list)
         super().__init__(vial_list)
+
+    def move(self, donor_index, recipient_index):
+        while self.__can_move(self[donor_index], self[recipient_index]):
+            item = self[donor_index].pop()
+            self[recipient_index].append(item)
+
+    @staticmethod
+    def __can_move(donor_vial, recipient_vial):
+        if len(donor_vial) == 0:
+            return False
+        elif recipient_vial.can_accept(donor_vial[-1]):
+            return True
+        return False
 
 
 def check_board_arguments_meet_requirements(vial_list):
