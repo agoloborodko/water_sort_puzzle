@@ -9,6 +9,14 @@ class Vial(UserList):
         super().__init__(initlist)
         self.max_size = max_size
 
+    def is_appendable(self, elem):
+        if len(self.data) < self.max_size:
+            if len(self.data) == 0:
+                return True
+            elif elem == self.data[-1]:
+                return True
+        return False
+
 
 def check_vial_arguments_meet_requirements(max_size, initlist):
     assert max_size > 0, 'max_size must be greater than zero!'

@@ -25,6 +25,18 @@ class TestVial(unittest.TestCase):
         with self.assertRaises(TypeError):
             obj.Vial(4, 5)
 
+    def test_is_appendable(self):
+        vial_1 = obj.Vial(2)
+        self.assertTrue(vial_1.is_appendable(1))
+
+        vial_2 = obj.Vial(1, [0])
+        self.assertFalse(vial_2.is_appendable(0))
+        self.assertFalse(vial_2.is_appendable(1))
+
+        vial_3 = obj.Vial(2, [0])
+        self.assertFalse(vial_3.is_appendable(1))
+        self.assertTrue(vial_3.is_appendable(0))
+
 
 class TestGameObjectsFunctions(unittest.TestCase):
 
