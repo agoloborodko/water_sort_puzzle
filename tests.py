@@ -57,6 +57,16 @@ class TestVial(unittest.TestCase):
         with self.assertRaises(ex.VialCannotAcceptThisException):
             vial_3.append(1)
 
+    def test_pop(self):
+        vial_1 = obj.Vial(3, [1, 2, 3])
+        x = vial_1.pop()
+        self.assertEqual(x, 3)
+        self.assertEqual(vial_1, [1, 2])
+
+        vial_2 = obj.Vial(3)
+        with self.assertRaises(IndexError):
+            vial_2.pop()
+
 
 class TestGameObjectsFunctions(unittest.TestCase):
 

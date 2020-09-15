@@ -1,6 +1,7 @@
 from collections import UserList
 from exceptions import VialCannotAcceptThisException
 
+
 class Vial(UserList):
 
     def __init__(self, max_size, initlist=None):
