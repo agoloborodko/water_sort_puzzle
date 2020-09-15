@@ -126,6 +126,17 @@ class TestVialBoard(unittest.TestCase):
         with self.assertRaises(AssertionError):
             obj.VialBoard([self.vial_3])
 
+    def test_init_from_lists(self):
+        vial_board = obj.VialBoard(
+            [
+                [0, 1, 1],
+                [],
+                [1, 0, 0]
+            ]
+        )
+        self.assertIsInstance(vial_board, obj.VialBoard)
+        self.assertEqual(vial_board[0], [0, 1, 1])
+
     def test_move(self):
         self.vial_board.move(0, 1)
         self.assertEqual(self.vial_board[0], [1, 2])
