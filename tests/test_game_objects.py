@@ -158,6 +158,21 @@ class TestVialBoard(unittest.TestCase):
     def test_print(self):
         print(self.vial_board)
 
+    def test_restart_game(self):
+        board_1 = obj.VialBoard([
+            [1, 2, 3],
+            []
+        ])
+        board_2 = obj.VialBoard([
+            [1, 2, 3],
+            []
+        ])
+
+        board_1.move(0, 1)
+        self.assertNotEqual(board_1, board_2)
+        board_1.restart_game()
+        self.assertEqual(board_1, board_2)
+
 
 if __name__ == '__main__':
     unittest.main()

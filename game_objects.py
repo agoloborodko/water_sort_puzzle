@@ -1,3 +1,4 @@
+import copy
 from collections import UserList
 from exceptions import VialCannotAcceptThisException, VialIsFullException
 
@@ -53,6 +54,7 @@ class VialBoard(UserList):
         vial_list = self.__make_vials_from_lists(vial_list)
         check_board_arguments_meet_requirements(vial_list)
         super().__init__(vial_list)
+        self.init_data = copy.deepcopy(self.data)
 
     def __str__(self):
         result = ''
@@ -92,8 +94,11 @@ class VialBoard(UserList):
             item = self[donor_index].pop()
             self[recipient_index].append(item)
 
+    def restart_game(self):
+        self.data = copy.deepcopy(self.init_data)
+
     # TODO: method "solved"
-    # TODO: add a way to memorize path, do step-backs and return to start
+    # TODO: add a way to memorize path and do step-backs
 
 
 def check_board_arguments_meet_requirements(vial_list):
