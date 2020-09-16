@@ -72,6 +72,15 @@ class TestVial(unittest.TestCase):
         self.assertTrue(vial_1.is_full())
         self.assertFalse(vial_2.is_full())
 
+    def test_is_empty(self):
+        vial_1 = obj.Vial(3, [])
+        vial_2 = obj.Vial(4)
+        vial_3 = obj.Vial(2, [1])
+
+        self.assertTrue(vial_1.is_empty())
+        self.assertTrue(vial_2.is_empty())
+        self.assertFalse(vial_3.is_empty())
+
 
 class TestGameObjectsFunctions(unittest.TestCase):
 

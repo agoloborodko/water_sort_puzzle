@@ -16,6 +16,12 @@ class Vial(UserList):
         else:
             return True
 
+    def is_empty(self):
+        if len(self.data) == 0:
+            return True
+        else:
+            return False
+
     def can_accept(self, item):
         if not self.is_full():
             if len(self.data) == 0:
