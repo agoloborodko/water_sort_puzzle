@@ -23,10 +23,10 @@ class Vial(UserList):
             return False
 
     def can_accept(self, item):
+        if self.is_empty():
+            return True
         if not self.is_full():
-            if len(self.data) == 0:
-                return True
-            elif item == self.data[-1]:
+            if item == self.data[-1]:
                 return True
         return False
 
