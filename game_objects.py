@@ -97,6 +97,9 @@ class VialBoard(UserList):
     def restart_game(self):
         self.data = copy.deepcopy(self.init_data)
 
+    def solved(self):
+        pass
+
     # TODO: method "solved"
     # TODO: add a way to memorize path and do step-backs
 

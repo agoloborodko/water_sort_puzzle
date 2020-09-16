@@ -173,6 +173,26 @@ class TestVialBoard(unittest.TestCase):
         board_1.restart_game()
         self.assertEqual(board_1, board_2)
 
+    def test_solved(self):
+        board_1 = obj.VialBoard([
+            [1, 1],
+            [2, 2],
+            []
+        ])
+        board_2 = obj.VialBoard([
+            [1, 2],
+            [2, 1],
+            []
+        ])
+        board_3 = obj.VialBoard([
+            [1],
+            [1],
+            []
+        ])
+        self.assertTrue(board_1.solved())
+        self.assertFalse(board_2.solved())
+        self.assertFalse(board_3.solved())
+
 
 if __name__ == '__main__':
     unittest.main()
