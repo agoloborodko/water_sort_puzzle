@@ -93,10 +93,10 @@ class VialBoard(UserList):
             result += '\n'
         return result
 
-    def __can_move(self, donor_index, recipient_index):
+    def can_move(self, donor_index, recipient_index):
         if donor_index == recipient_index:
             return False
-        
+
         donor_vial = self[donor_index]
         recipient_vial = self[recipient_index]
 
@@ -131,7 +131,7 @@ class VialBoard(UserList):
         self[recipient_index].append(item)
 
     def move(self, donor_index, recipient_index):
-        while self.__can_move(donor_index, recipient_index):
+        while self.can_move(donor_index, recipient_index):
             self.__make_simple_move(donor_index, recipient_index)
 
     @reset_path
