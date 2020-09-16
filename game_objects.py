@@ -93,8 +93,13 @@ class VialBoard(UserList):
             result += '\n'
         return result
 
-    @staticmethod
-    def __can_move(donor_vial, recipient_vial):
+    def __can_move(self, donor_index, recipient_index):
+        if donor_index == recipient_index:
+            return False
+        
+        donor_vial = self[donor_index]
+        recipient_vial = self[recipient_index]
+
         if donor_vial.is_empty():
             return False
         elif recipient_vial.can_accept(donor_vial[-1]):
@@ -126,9 +131,8 @@ class VialBoard(UserList):
         self[recipient_index].append(item)
 
     def move(self, donor_index, recipient_index):
-        if donor_index != recipient_index:
-            while self.__can_move(self[donor_index], self[recipient_index]):
-                self.__make_simple_move(donor_index, recipient_index)
+        while self.__can_move(donor_index, recipient_index):
+            self.__make_simple_move(donor_index, recipient_index)
 
     @reset_path
     def restart_game(self):
