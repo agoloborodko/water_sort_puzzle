@@ -68,7 +68,7 @@ class VialBoard(UserList):
 
     @staticmethod
     def __can_move(donor_vial, recipient_vial):
-        if len(donor_vial) == 0:
+        if donor_vial.is_empty():
             return False
         elif recipient_vial.can_accept(donor_vial[-1]):
             return True
