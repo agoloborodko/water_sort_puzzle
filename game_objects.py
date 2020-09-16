@@ -10,6 +10,12 @@ class Vial(UserList):
         super().__init__(initlist)
         self.max_size = max_size
 
+    def is_full(self):
+        if len(self.data) < self.max_size:
+            return False
+        else:
+            return True
+
     def can_accept(self, item):
         if len(self.data) < self.max_size:
             if len(self.data) == 0:

@@ -73,6 +73,12 @@ class TestVial(unittest.TestCase):
         with self.assertRaises(IndexError):
             vial_2.pop()
 
+    def test_is_full(self):
+        vial_1 = obj.Vial(3, [1, 2, 3])
+        vial_2 = obj.Vial(4, [1, 2, 3])
+        self.assertTrue(vial_1.is_full())
+        self.assertFalse(vial_2.is_full())
+
 
 class TestGameObjectsFunctions(unittest.TestCase):
 
