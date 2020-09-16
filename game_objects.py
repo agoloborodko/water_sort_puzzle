@@ -39,6 +39,9 @@ class Vial(UserList):
         self.__raise_exception_if_full()
         super().append(item)
 
+    def count_unique(self):
+        return len(set(self))
+
 
 def check_vial_arguments_meet_requirements(max_size, initlist):
     assert max_size > 0, 'max_size must be greater than zero!'
@@ -104,9 +107,16 @@ class VialBoard(UserList):
         self.data = copy.deepcopy(self.init_data)
 
     def solved(self):
-        pass
+        game_items = set()
+        for vial in self:
+            if not vial.is_empty():
+                if vial.count_unique() > 1:
+                    return False
+                elif vial[0] in game_items:
+                    return False
+                game_items.add(vial[0])
+        return True
 
-    # TODO: method "solved"
     # TODO: add a way to memorize path and do step-backs
 
 
