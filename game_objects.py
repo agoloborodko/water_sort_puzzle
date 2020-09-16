@@ -89,6 +89,12 @@ class VialBoard(UserList):
             result.append(vial)
         return result
 
+    def get_set_of_items(self):
+        s = set()
+        for vial in self:
+            s = s.union(vial)
+        return s
+
     def move(self, donor_index, recipient_index):
         while self.__can_move(self[donor_index], self[recipient_index]):
             item = self[donor_index].pop()

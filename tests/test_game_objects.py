@@ -193,6 +193,15 @@ class TestVialBoard(unittest.TestCase):
         self.assertFalse(board_2.solved())
         self.assertFalse(board_3.solved())
 
+    def test_get_set_of_items(self):
+        board_1 = obj.VialBoard([
+            [1, 1, 3],
+            [2, 2, 1],
+            []
+        ])
+        s = board_1.get_set_of_items()
+        self.assertEqual(s, {1, 2, 3})
+
 
 if __name__ == '__main__':
     unittest.main()
