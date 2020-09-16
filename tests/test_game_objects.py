@@ -49,18 +49,11 @@ class TestVial(unittest.TestCase):
         vial_1.append(1)
         self.assertEqual(vial_1, [1])
 
-        with self.assertRaises(ex.VialCannotAcceptThisException):
-            vial_1.append(2)
-
-        vial_1.append(1)
-        self.assertEqual(vial_1, [1, 1])
-
-        vial_2 = obj.Vial(2, [1])
-        with self.assertRaises(ex.VialCannotAcceptThisException):
-            vial_2.append(2)
+        vial_1.append(2)
+        self.assertEqual(vial_1, [1, 2])
 
         vial_3 = obj.Vial(2, [1, 1])
-        with self.assertRaises(ex.VialCannotAcceptThisException):
+        with self.assertRaises(ex.VialIsFullException):
             vial_3.append(1)
 
     def test_pop(self):

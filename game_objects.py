@@ -1,5 +1,5 @@
 from collections import UserList
-from exceptions import VialCannotAcceptThisException
+from exceptions import VialCannotAcceptThisException, VialIsFullException
 
 
 class Vial(UserList):
@@ -24,12 +24,12 @@ class Vial(UserList):
                 return True
         return False
 
-    def __raise_exception_if_not_appendable(self, item):
-        if not self.can_accept(item):
-            raise VialCannotAcceptThisException(f'Item {item} cannot be put in vial {self}')
+    def __raise_exception_if_full(self):
+        if self.is_full():
+            raise VialIsFullException('Vial is full and cannot accept more items')
 
     def append(self, item):
-        self.__raise_exception_if_not_appendable(item)
+        self.__raise_exception_if_full()
         super().append(item)
 
 
