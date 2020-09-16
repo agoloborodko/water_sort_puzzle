@@ -17,7 +17,7 @@ class Vial(UserList):
             return True
 
     def can_accept(self, item):
-        if len(self.data) < self.max_size:
+        if not self.is_full():
             if len(self.data) == 0:
                 return True
             elif item == self.data[-1]:
