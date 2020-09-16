@@ -172,6 +172,7 @@ class TestVialBoard(unittest.TestCase):
         self.assertNotEqual(board_1, board_2)
         board_1.restart_game()
         self.assertEqual(board_1, board_2)
+        self.assertEqual([], board_1.path)
 
     def test_solved(self):
         board_1 = obj.VialBoard([
@@ -201,6 +202,38 @@ class TestVialBoard(unittest.TestCase):
         ])
         s = board_1.get_set_of_items()
         self.assertEqual(s, {1, 2, 3})
+
+    def test_get_path(self):
+        board = obj.VialBoard([
+            [1, 1, 2],
+            [2, 2, 1],
+            []
+        ])
+        board.move(2, 0)
+        self.assertEqual([], board.path)
+        board.move(0, 2)
+        self.assertEqual([(0, 2)], board.path)
+        board.move(1, 0)
+        self.assertEqual([(0, 2), (1, 0)], board.path)
+        board.move(1, 0)
+        self.assertEqual([(0, 2), (1, 0)], board.path)
+
+        board_2 = obj.VialBoard([
+            [1, 1],
+            [2, 2],
+            []
+        ])
+        board_2.move(0, 2)
+        self.assertEqual([(0, 2), (0, 2)], board_2.path)
+
+    def test_get_path_for_multimove(self):
+        board = obj.VialBoard([
+            [1, 1],
+            []
+        ])
+
+        board.move(0, 1)
+        self.assertEqual([(0, 1), (0, 1)], board.path)
 
 
 if __name__ == '__main__':

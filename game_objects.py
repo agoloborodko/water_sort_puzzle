@@ -1,4 +1,5 @@
 import copy
+from functools import wraps
 from collections import UserList
 from exceptions import VialCannotAcceptThisException, VialIsFullException
 
@@ -51,8 +52,29 @@ def check_vial_arguments_meet_requirements(max_size, initlist):
         assert len(initlist) <= max_size, 'initlist size cannot be greater than max_size!'
 
 
+def log_move(method):
+    @wraps(method)
+    def _impl(self, *method_args, **method_kwargs):
+        method_output = method(self, *method_args, **method_kwargs)
+        self.path.append(tuple(method_args))
+        return method_output
+    return _impl
+
+
+def reset_path(method):
+    @wraps(method)
+    def _impl(self, *method_args, **method_kwargs):
+        method_output = method(self, *method_args, **method_kwargs)
+        self.path = []
+        return method_output
+    return _impl
+
+
 class VialBoard(UserList):
 
+    path = []
+
+    @reset_path
     def __init__(self, vial_list):
         vial_list = self.__make_vials_from_lists(vial_list)
         check_board_arguments_meet_requirements(vial_list)
@@ -98,11 +120,16 @@ class VialBoard(UserList):
             s = s.union(vial)
         return s
 
+    @log_move
+    def __make_simple_move(self, donor_index, recipient_index):
+        item = self[donor_index].pop()
+        self[recipient_index].append(item)
+
     def move(self, donor_index, recipient_index):
         while self.__can_move(self[donor_index], self[recipient_index]):
-            item = self[donor_index].pop()
-            self[recipient_index].append(item)
+            self.__make_simple_move(donor_index, recipient_index)
 
+    @reset_path
     def restart_game(self):
         self.data = copy.deepcopy(self.init_data)
 
