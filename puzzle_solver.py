@@ -1,3 +1,6 @@
+from game_objects import VialBoard
+
+
 def solve(vial_board):
     if vial_board.solved():
         return vial_board

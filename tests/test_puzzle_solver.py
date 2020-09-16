@@ -21,7 +21,31 @@ class TestSolver(unittest.TestCase):
         )
         board_1_solved = ps.solve(board_1)
         for i in board_1_solved:
-            self.assertIn(i, board_1_solved)
+            self.assertIn(i, board_1_target)
+
+    def test_solve_2(self):
+        board = ps.VialBoard(
+            [
+                [7, 5, 1, 11],
+                [8, 11, 3, 3],
+                [4, 9, 7, 1],
+                [8, 11, 10, 9],
+                [6, 4, 12, 4],
+                [10, 11, 8, 1],
+                [12, 8, 5, 6],
+                [6, 12, 3, 10],
+                [9, 10, 1, 6],
+                [2, 7, 2, 2],
+                [7, 3, 12, 9],
+                [2, 4, 5, 5],
+                [],
+                []
+            ]
+        )
+        board_items = board.get_set_of_items()
+        board_solved = ps.solve(board)
+
+        self.assertTrue(board_solved.solved())
 
 
 if __name__ == '__main__':
