@@ -144,7 +144,23 @@ class VialBoard(UserList):
                 game_items.add(vial[0])
         return True
 
-    # TODO: add a way to memorize path and do step-backs
+    def __get_last_step(self):
+        return self.path[-1]
+
+    def __get_last_step_size(self):
+        i = 0
+        while self.path[-i - 1] == self.__get_last_step():
+            i += 1
+            if i == len(self.path):
+                break
+        return i
+
+    def step_back(self):
+        n = self.__get_last_step_size()
+        for i in range(n):
+            step = self.path.pop()
+            item = self[step[1]].pop()
+            self[step[0]].append(item)
 
 
 def check_board_arguments_meet_requirements(vial_list):

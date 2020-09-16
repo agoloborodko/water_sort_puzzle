@@ -235,6 +235,16 @@ class TestVialBoard(unittest.TestCase):
         board.move(0, 1)
         self.assertEqual([(0, 1), (0, 1)], board.path)
 
+    def test_step_back(self):
+        board = obj.VialBoard([
+            [1, 1],
+            []
+        ])
+        board.move(0, 1)
+        board.step_back()
+        self.assertEqual([[1, 1], []], board)
+        self.assertEqual([], board.path)
+
 
 if __name__ == '__main__':
     unittest.main()
