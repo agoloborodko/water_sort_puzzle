@@ -4,6 +4,13 @@ from collections import UserList
 from exceptions import VialCannotAcceptThisException, VialIsFullException
 
 
+def validate_path(path):
+    assert isinstance(path, list), 'Path must be list type!'
+    for i in path:
+        assert isinstance(i, tuple), 'All path members must be tuples!'
+        assert len(i) == 2, 'All path tuples must be length of 2!'
+
+
 class Path(UserList):
     def __str__(self):
         if len(self) == 0:

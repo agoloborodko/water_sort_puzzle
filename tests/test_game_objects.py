@@ -9,6 +9,21 @@ class TestPath(unittest.TestCase):
         p = obj.Path([(0, 1), (1, 2)])
         self.assertEqual('1->2, 2->3', p.__str__())
 
+    def test_validate_path(self):
+        p1 = [(0, 1), (1, 2)]
+        obj.validate_path(p1)
+
+        p2 = [(0, 1), (1, 2, 3)]
+        p3 = [1, 2]
+        p4 = 'Hello'
+
+        with self.assertRaises(AssertionError):
+            obj.validate_path(p2)
+        with self.assertRaises(AssertionError):
+            obj.validate_path(p3)
+        with self.assertRaises(AssertionError):
+            obj.validate_path(p4)
+
 
 class TestVial(unittest.TestCase):
 
