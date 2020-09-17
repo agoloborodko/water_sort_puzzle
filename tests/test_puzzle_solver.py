@@ -130,5 +130,27 @@ class TestSolver(unittest.TestCase):
             d
         )
 
+    def test_check_each_el_fits_vial(self):
+        board_1 = ps.VialBoard(
+            [
+                [1, 2, 2, 1],
+                [2, 3, 1, 1],
+                [3, 3, 2, 3],
+                []
+            ]
+        )
+        board_2 = ps.VialBoard(
+            [
+                [1, 2, 2, 1],
+                [2, 2, 1, 1],
+                [3, 2, 2, 3],
+                []
+            ]
+        )
+
+        self.assertTrue(ps.check_each_el_fits_vial(board_1))
+        self.assertFalse(ps.check_each_el_fits_vial(board_2))
+
+
 if __name__ == '__main__':
     unittest.main()

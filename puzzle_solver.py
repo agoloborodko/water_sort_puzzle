@@ -61,6 +61,16 @@ def is_solvable(vial_board):
         return True
 
 
+def check_each_el_fits_vial(vial_board):
+    counts = count_board_elements(vial_board)
+    size = vial_board[0].max_size
+
+    for v in counts.values():
+        if v > size:
+            return False
+    return True
+
+
 def count_board_elements(vial_board):
     d = {}
     for vial in vial_board:
