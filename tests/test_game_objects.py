@@ -200,7 +200,13 @@ class TestVialBoard(unittest.TestCase):
             ]
         )
         self.assertIsInstance(vial_board, obj.VialBoard)
-        self.assertEqual(vial_board[0], [0, 1, 1])
+        self.assertEqual([0, 1, 1], vial_board[0])
+
+        vial_board.move(0, 1)
+        self.assertEqual([0], vial_board[0])
+        self.assertEqual([1, 1], vial_board[1])
+        self.assertEqual([1, 1], vial_board[1])
+        self.assertEqual([(0, 1), (0, 1)], vial_board.path)
 
     def test_move(self):
         self.vial_board.move(0, 1)
