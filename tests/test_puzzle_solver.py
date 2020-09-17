@@ -22,6 +22,21 @@ class TestSolver(unittest.TestCase):
         self.assertNotEqual(board, new_board)
         self.assertNotEqual(board.path, new_board.path)
 
+    def test_clone_vial_board_generation(self):
+        board = ps.VialBoard(
+            [
+                [0, 1, 0],
+                [1, 1, 0],
+                []
+            ]
+        )
+        board.move(0, 2)
+
+        new_board = ps.clone_vial_board(board)
+        self.assertEqual(1, new_board.gen)
+        new_board = ps.clone_vial_board(new_board)
+        self.assertEqual(2, new_board.gen)
+
     def test_solve(self):
         board_1 = ps.VialBoard(
             [

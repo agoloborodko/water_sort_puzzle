@@ -4,11 +4,21 @@ import queue
 from exceptions import CannotSolveThisException
 
 
+class GenVialBoard(VialBoard):
+    gen = 0
+
+
 def clone_vial_board(board):
     board_data = copy.deepcopy(board.data)
     board_path = copy.deepcopy(board.path)
-    new_board = VialBoard(board_data)
+
+    new_board = GenVialBoard(board_data)
     new_board.path = board_path
+
+    if not isinstance(board, GenVialBoard):
+        new_board.gen = 1
+    else:
+        new_board.gen = board.gen + 1
 
     return new_board
 
