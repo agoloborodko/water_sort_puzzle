@@ -44,7 +44,6 @@ def solve_queue_wide(q):
 
 
 def solve_stack_deep(s):
-    gen_map = {}
     while len(s) > 0:
         board = s.pop()
         for i in range(len(board)):
@@ -55,15 +54,6 @@ def solve_stack_deep(s):
                     if new_board.solved():
                         return new_board
                     s.append(new_board)
-
-                    g = new_board.gen
-                    if g in gen_map:
-                        gen_map[g] += 1
-                    else:
-                        gen_map[g] = 1
-
-                    if len(s) % 1000 == 0:
-                        print(f'stack len: {len(s)}, stack stat: {gen_map}')
 
 
 def move_is_reasonable(vial_board, move):
