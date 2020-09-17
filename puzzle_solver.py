@@ -43,7 +43,38 @@ def solve_queue_wide(q):
     raise CannotSolveThisException()
 
 
-def solve(vial_board):
+def solve_stack_deep(s):
+    gen_map = {}
+    while len(s) > 0:
+        board = s.pop()
+        for i in range(len(board)):
+            for j in range(len(board)):
+                if board.can_move(i, j):
+                    new_board = clone_vial_board(board)
+                    new_board.move(i, j)
+                    if new_board.solved():
+                        return new_board
+                    s.append(new_board)
+
+                    g = new_board.gen
+                    if g in gen_map:
+                        gen_map[g] += 1
+                    else:
+                        gen_map[g] = 1
+
+                    if len(s) % 1000 == 0:
+                        print(f'stack len: {len(s)}, stack stat: {gen_map}')
+
+
+def solve_deep(vial_board):
+    s = [vial_board]
+    if is_solvable(vial_board):
+        return solve_stack_deep(s)
+    else:
+        raise CannotSolveThisException()
+
+
+def solve_wide(vial_board):
     q = queue.Queue()
     q.put(vial_board)
 
@@ -51,6 +82,10 @@ def solve(vial_board):
         return solve_queue_wide(q)
     else:
         raise CannotSolveThisException()
+
+
+def solve(vial_board):
+    return solve_deep(vial_board)
 
 
 def is_solvable(vial_board):
