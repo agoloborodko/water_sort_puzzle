@@ -229,9 +229,9 @@ class TestSolver(unittest.TestCase):
     def test_move_is_reasonable_repeats(self):
         board = ps.VialBoard(
             [
-                [3],
-                [3, 3],
-                []
+                [2, 1],
+                [1],
+                [1, 2, 3]
             ]
         )
 
