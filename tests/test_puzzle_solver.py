@@ -255,6 +255,18 @@ class TestSolver(unittest.TestCase):
         vial = [1]
         self.assertEqual(1, ps.calc_water_depth(vial))
 
+    def test_move_cleans_upper_el(self):
+        board = ps.VialBoard(
+            [
+                ps.Vial(3, [1, 2, 2]),
+                ps.Vial(3, [2]),
+                ps.Vial(3, [1, 2])
+            ]
+        )
+
+        self.assertTrue(ps.move_cleans_upper_el(board[0], board[1]))
+        self.assertFalse(ps.move_cleans_upper_el(board[0], board[2]))
+
 
 if __name__ == '__main__':
     unittest.main()

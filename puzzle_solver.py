@@ -1,4 +1,4 @@
-from game_objects import VialBoard
+from game_objects import VialBoard, Vial
 import copy
 import queue
 from exceptions import CannotSolveThisException
@@ -77,6 +77,17 @@ def move_is_reasonable(vial_board, move):
             return False
 
     return True
+
+
+def move_cleans_upper_el(vial_from, vial_to):
+    assert isinstance(vial_from, Vial)
+    assert isinstance(vial_to, Vial)
+
+    move_depth = calc_water_depth(vial_from)
+    if move_depth > vial_to.max_size - len(vial_to):
+        return False
+    else:
+        return True
 
 
 def calc_water_depth(vial):
