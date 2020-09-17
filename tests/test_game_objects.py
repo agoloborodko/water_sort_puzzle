@@ -113,6 +113,63 @@ class TestGameObjectsFunctions(unittest.TestCase):
         with self.assertRaises(AssertionError):
             obj.check_board_arguments_meet_requirements([1, 2, 2])
 
+    def test_check_type_list_of_lists(self):
+        l_1 = [[], [1, 2]]
+        l_2 = [1, []]
+        l_3 = 5
+        v1 = obj.Vial(5)
+        l_4 = [v1]
+        self.assertTrue(obj.check_type_list_of_lists(l_1))
+        self.assertFalse(obj.check_type_list_of_lists(l_2))
+        self.assertFalse(obj.check_type_list_of_lists(l_3))
+        self.assertFalse(obj.check_type_list_of_lists(l_4))
+
+    def test_check_type_list_of_vials(self):
+        l_1 = [[], [1, 2]]
+        l_2 = 5
+        v1 = obj.Vial(5)
+        l_3 = [v1]
+        self.assertFalse(obj.check_type_list_of_vials(l_1))
+        self.assertFalse(obj.check_type_list_of_vials(l_2))
+        self.assertTrue(obj.check_type_list_of_vials(l_3))
+
+    def test_raise_exception_if_not_list_of_lists(self):
+        l_1 = [[], [1, 2]]
+        l_2 = [1, []]
+        l_3 = 5
+        v1 = obj.Vial(5)
+        l_4 = [v1]
+
+        obj.raise_exception_if_not_list_of_lists(l_1)
+        with self.assertRaises(TypeError):
+            obj.raise_exception_if_not_list_of_lists(l_2)
+        with self.assertRaises(TypeError):
+            obj.raise_exception_if_not_list_of_lists(l_3)
+        with self.assertRaises(TypeError):
+            obj.raise_exception_if_not_list_of_lists(l_4)
+
+    def test_get_max_internal_list_size(self):
+        l_1 = [[], [1, 2]]
+        l_2 = [[], []]
+
+        self.assertEqual(2, obj.get_max_internal_list_size(l_1))
+        self.assertEqual(0, obj.get_max_internal_list_size(l_2))
+
+    def test_make_vials_from_lists(self):
+        l_1 = [[], [1, 2]]
+        l_2 = [[], []]
+
+        v_1 = obj.make_vials_from_lists(l_1)
+        v_2 = obj.make_vials_from_lists(l_2)
+
+        for i in v_1:
+            self.assertIsInstance(i, obj.Vial)
+            self.assertEqual(2, i.max_size)
+
+        for i in v_2:
+            self.assertIsInstance(i, obj.Vial)
+            self.assertEqual(2, i.max_size)
+
 
 class TestVialBoard(unittest.TestCase):
 

@@ -70,14 +70,61 @@ def reset_path(method):
     return _impl
 
 
+def check_type_list_of_lists(input_list):
+    if not isinstance(input_list, list):
+        return False
+    for i in input_list:
+        if not isinstance(i, list):
+            return False
+    return True
+
+
+def check_type_list_of_vials(input_list):
+    if not isinstance(input_list, list):
+        return False
+    for i in input_list:
+        if not isinstance(i, Vial):
+            return False
+    return True
+
+
+def raise_exception_if_not_list_of_lists(input_list):
+    if not check_type_list_of_lists(input_list):
+        raise TypeError(f'expected list of lists, got {type(input_list)}')
+
+
+def get_max_internal_list_size(list_of_lists):
+    n = 0
+    for l in list_of_lists:
+        if len(l) > n:
+            n = len(l)
+    return n
+
+
+def make_vials_from_lists(input_list):
+    raise_exception_if_not_list_of_lists(input_list)
+    max_size = get_max_internal_list_size(input_list)
+    if max_size < 2:
+        max_size = 2
+    result = []
+
+    for i in input_list:
+        vial = Vial(max_size, i)
+        result.append(vial)
+    return result
+
+
 class VialBoard(UserList):
 
     path = []
 
     @reset_path
     def __init__(self, vial_list):
-        vial_list = self.__make_vials_from_lists(vial_list)
+        if check_type_list_of_lists(vial_list):
+            vial_list = make_vials_from_lists(vial_list)
+
         check_board_arguments_meet_requirements(vial_list)
+
         super().__init__(vial_list)
         self.init_data = copy.deepcopy(self.data)
 
@@ -105,19 +152,6 @@ class VialBoard(UserList):
         elif recipient_vial.can_accept(donor_vial[-1]):
             return True
         return False
-
-    @staticmethod
-    def __make_vials_from_lists(input_list):
-        max_size = 2
-        result = []
-        for i in input_list:
-            assert isinstance(i, (Vial, list))
-            if len(i) > max_size:
-                max_size = len(i)
-        for i in input_list:
-            vial = Vial(max_size, i)
-            result.append(vial)
-        return result
 
     def get_set_of_items(self):
         s = set()
