@@ -56,9 +56,7 @@ def solve_stack_deep(s):
                     if new_board.solved():
                         return new_board
                     s.append(new_board)
-
-                    if len(s) % 1000 == 0 or len(new_board.path) % 50 == 0:
-                        print(f'{len(s)}')
+    raise CannotSolveThisException()
 
 
 def move_is_reasonable(vial_board, move):
