@@ -4,6 +4,24 @@ import puzzle_solver as ps
 
 class TestSolver(unittest.TestCase):
 
+    def test_clone_vial_board(self):
+        board = ps.VialBoard(
+            [
+                [0, 1, 0],
+                [1, 1, 0],
+                []
+            ]
+        )
+        board.move(0, 2)
+
+        new_board = ps.clone_vial_board(board)
+        self.assertEqual(board, new_board)
+        self.assertEqual(board.path, new_board.path)
+
+        new_board.move(1, 2)
+        self.assertNotEqual(board, new_board)
+        self.assertNotEqual(board.path, new_board.path)
+
     def test_solve(self):
         board_1 = ps.VialBoard(
             [

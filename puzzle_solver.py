@@ -1,5 +1,16 @@
 from game_objects import VialBoard
 import copy
+import queue
+from exceptions import CannotSolveThisException
+
+
+def clone_vial_board(board):
+    board_data = copy.deepcopy(board.data)
+    board_path = copy.deepcopy(board.path)
+    new_board = VialBoard(board_data)
+    new_board.path = board_path
+
+    return new_board
 
 
 def solve(vial_board):
