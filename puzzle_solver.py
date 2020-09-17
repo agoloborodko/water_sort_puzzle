@@ -11,9 +11,11 @@ class GenVialBoard(VialBoard):
 def clone_vial_board(board):
     board_data = copy.deepcopy(board.data)
     board_path = copy.deepcopy(board.path)
+    board_init_data = copy.deepcopy(board.init_data)
 
     new_board = GenVialBoard(board_data)
     new_board.path = board_path
+    new_board.init_data = board_init_data
 
     if not isinstance(board, GenVialBoard):
         new_board.gen = 1
