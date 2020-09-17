@@ -97,6 +97,9 @@ class TestSolver(unittest.TestCase):
         board_solved = ps.solve(board)
 
         self.assertTrue(board_solved.solved())
+        print(board)
+        print(board_solved)
+        print(board_solved.path)
 
     def test_unsolvable(self):
         board = ps.VialBoard(
