@@ -57,7 +57,7 @@ def solve_stack_deep(s):
                         return new_board
                     s.append(new_board)
 
-                    if len(s) % 1000 == 0 or len(new_board.path) % 1000 == 0:
+                    if len(s) % 1000 == 0 or len(new_board.path) % 50 == 0:
                         print(f'{len(s)}')
 
 
@@ -71,10 +71,17 @@ def move_is_reasonable(vial_board, move):
     if len(set(vial_board[from_i])) == 1 and vial_board[to_i].is_empty():
         return False
 
-    path = vial_board.path
+    if not move_cleans_upper_el(vial_board[from_i], vial_board[to_i]):
+        return False
+
+    path = copy.deepcopy(vial_board.path)
     if len(path) > 0:
         if path[-1] == (to_i, from_i):
             return False
+
+    path.append(move)
+    if is_path_repeats(path):
+        return False
 
     return True
 
