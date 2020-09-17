@@ -12,6 +12,10 @@ def validate_path(path):
 
 
 class Path(UserList):
+    def __init__(self, initlist=None):
+        validate_path(initlist)
+        super().__init__(initlist)
+
     def __str__(self):
         if len(self) == 0:
             return super().__str__()

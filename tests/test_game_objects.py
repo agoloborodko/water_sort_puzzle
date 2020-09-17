@@ -5,6 +5,12 @@ import exceptions as ex
 
 class TestPath(unittest.TestCase):
 
+    def test_init(self):
+        p = obj.Path([(0, 1), (1, 2)])
+        self.assertIsInstance(p, obj.Path)
+        with self.assertRaises(AssertionError):
+            p = obj.Path([(0, 1), (1, 2, 3)])
+
     def test_str(self):
         p = obj.Path([(0, 1), (1, 2)])
         self.assertEqual('1->2, 2->3', p.__str__())
