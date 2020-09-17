@@ -29,7 +29,7 @@ def solve_queue_wide(q):
         board = q.get()
         for i in range(len(board)):
             for j in range(len(board)):
-                if board.can_move(i, j):
+                if move_is_reasonable(board, (i, j)):
                     new_board = clone_vial_board(board)
                     new_board.move(i, j)
                     if new_board.solved():
@@ -49,7 +49,7 @@ def solve_stack_deep(s):
         board = s.pop()
         for i in range(len(board)):
             for j in range(len(board)):
-                if board.can_move(i, j):
+                if move_is_reasonable(board, (i, j)):
                     new_board = clone_vial_board(board)
                     new_board.move(i, j)
                     if new_board.solved():
