@@ -75,10 +75,26 @@ class TestSolver(unittest.TestCase):
                 []
             ]
         )
-        board_items = board.get_set_of_items()
         board_solved = ps.solve(board)
 
         self.assertTrue(board_solved.solved())
+
+    def test_unsolvable(self):
+        board = ps.VialBoard(
+            [
+                [7, 5, 1, 11],
+                [8, 11, 3, 3],
+                [4, 9, 7, 1],
+                [8, 11, 10, 9],
+                [2, 4, 5, 5],
+                [],
+                []
+            ]
+        )
+
+        self.assertFalse(ps.is_solvable(board))
+        with self.assertRaises(ps.CannotSolveThisException):
+            ps.solve(board)
 
 
 if __name__ == '__main__':

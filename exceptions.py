@@ -6,3 +6,7 @@ class VialCannotAcceptThisException(Exception):
 
 class VialIsFullException(Exception):
     pass
+
+
+class CannotSolveThisException(Exception):
+    pass
