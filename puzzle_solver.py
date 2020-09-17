@@ -59,3 +59,14 @@ def is_solvable(vial_board):
         return False
     else:
         return True
+
+
+def count_board_elements(vial_board):
+    d = {}
+    for vial in vial_board:
+        for el in vial:
+            if el in d:
+                d[el] += 1
+            else:
+                d[el] = 1
+    return d

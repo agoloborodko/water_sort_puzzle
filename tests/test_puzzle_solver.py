@@ -111,6 +111,24 @@ class TestSolver(unittest.TestCase):
 
         self.assertTrue(ps.is_solvable(board))
 
+    def test_count_board_elements(self):
+        board = ps.VialBoard(
+            [
+                [1, 2, 2, 1],
+                [2, 3, 5, 1],
+                [3, 3, 5, 4],
+                [1, 4, 4, 5],
+                [5, 2, 3, 4],
+                [],
+                []
+            ]
+        )
+
+        d = ps.count_board_elements(board)
+        self.assertEqual(
+            {1: 4, 2: 4, 3: 4, 4: 4, 5: 4},
+            d
+        )
 
 if __name__ == '__main__':
     unittest.main()
