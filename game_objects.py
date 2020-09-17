@@ -4,6 +4,19 @@ from collections import UserList
 from exceptions import VialCannotAcceptThisException, VialIsFullException
 
 
+class Path(UserList):
+    def __str__(self):
+        if len(self) == 0:
+            return super().__str__()
+
+        result = []
+        i_prev = None
+        for i in self:
+            if i_prev != i:
+                result.append(f'{i[0] + 1}->{i[1] + 1}')
+        return ', '.join(result)
+
+
 class Vial(UserList):
 
     def __init__(self, max_size, initlist=None):

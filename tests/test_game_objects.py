@@ -3,6 +3,13 @@ import game_objects as obj
 import exceptions as ex
 
 
+class TestPath(unittest.TestCase):
+
+    def test_str(self):
+        p = obj.Path([(0, 1), (1, 2)])
+        self.assertEqual('1->2, 2->3', p.__str__())
+
+
 class TestVial(unittest.TestCase):
 
     def test_init(self):
