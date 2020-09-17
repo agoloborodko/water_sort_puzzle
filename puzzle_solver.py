@@ -79,6 +79,16 @@ def move_is_reasonable(vial_board, move):
     return True
 
 
+def calc_water_depth(vial):
+    if len(vial) == 0:
+        return 0
+
+    i = len(vial) - 1
+    while i > 0 and vial[i] == vial[i - 1]:
+        i -= 1
+    return len(vial) - i
+
+
 def is_path_repeats(path, depth=0):
     assert depth >= 0
     max_depth = len(path) // 2

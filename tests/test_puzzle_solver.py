@@ -239,6 +239,22 @@ class TestSolver(unittest.TestCase):
         board.move(1, 0)
         self.assertFalse(ps.move_is_reasonable(board, (0, 1)))
 
+    def test_calc_water_depth(self):
+        vial = [1, 2, 3]
+        self.assertEqual(1, ps.calc_water_depth(vial))
+
+        vial = [1, 2, 2]
+        self.assertEqual(2, ps.calc_water_depth(vial))
+
+        vial = [1, 1]
+        self.assertEqual(2, ps.calc_water_depth(vial))
+
+        vial = []
+        self.assertEqual(0, ps.calc_water_depth(vial))
+
+        vial = [1]
+        self.assertEqual(1, ps.calc_water_depth(vial))
+
 
 if __name__ == '__main__':
     unittest.main()
