@@ -45,17 +45,17 @@ def solve_queue_wide(q):
     raise CannotSolveThisException()
 
 
-def solve_stack_deep(s):
-    while len(s) > 0:
-        board = s.pop()
-        for i in range(len(board)):
-            for j in range(len(board)):
-                if move_is_reasonable(board, (i, j)):
-                    new_board = clone_vial_board(board)
-                    new_board.move(i, j)
-                    if new_board.solved():
-                        return new_board
-                    s.append(new_board)
+def solve_stack_deep(stack):
+    while len(stack) > 0:
+        b = stack.pop()
+        for i in range(len(b)):
+            for j in range(len(b)):
+                if move_is_reasonable(b, (i, j)):
+                    new_b = clone_vial_board(b)
+                    new_b.move(i, j)
+                    if new_b.solved():
+                        return new_b
+                    stack.append(new_b)
     raise CannotSolveThisException()
 
 
