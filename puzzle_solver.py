@@ -66,6 +66,19 @@ def solve_stack_deep(s):
                         print(f'stack len: {len(s)}, stack stat: {gen_map}')
 
 
+def move_is_reasonable(vial_board, move):
+    from_i = move[0]
+    to_i = move[1]
+
+    if not vial_board.can_move(from_i, to_i):
+        return False
+
+    if len(set(vial_board[from_i])) == 1 and vial_board[to_i].is_empty():
+        return False
+
+    return True
+
+
 def solve_deep(vial_board):
     s = [vial_board]
     if is_solvable(vial_board):

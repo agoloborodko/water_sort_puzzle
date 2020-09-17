@@ -170,6 +170,20 @@ class TestSolver(unittest.TestCase):
         self.assertTrue(ps.check_each_el_fits_vial(board_1))
         self.assertFalse(ps.check_each_el_fits_vial(board_2))
 
+    def test_move_is_reasonable(self):
+        board = ps.VialBoard(
+            [
+                [1, 2],
+                [3, 3],
+                [1],
+                []
+            ]
+        )
+
+        self.assertTrue(ps.move_is_reasonable(board, (0, 3)))
+        self.assertFalse(ps.move_is_reasonable(board, (1, 3)))
+        self.assertFalse(ps.move_is_reasonable(board, (2, 3)))
+
 
 if __name__ == '__main__':
     unittest.main()
