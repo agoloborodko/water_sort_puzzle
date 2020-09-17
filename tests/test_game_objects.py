@@ -15,6 +15,12 @@ class TestPath(unittest.TestCase):
         p = obj.Path([(0, 1), (1, 2)])
         self.assertEqual('1->2, 2->3', p.__str__())
 
+        p = obj.Path([(0, 1), (0, 1), (1, 2), (0, 1)])
+        self.assertEqual('1->2, 2->3, 1->2', p.__str__())
+
+        p = obj.Path([(0, 1), (0, 1), (0, 1)])
+        self.assertEqual('1->2', p.__str__())
+
     def test_validate_path(self):
         p1 = [(0, 1), (1, 2)]
         obj.validate_path(p1)

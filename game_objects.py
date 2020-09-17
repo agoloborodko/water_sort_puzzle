@@ -25,6 +25,7 @@ class Path(UserList):
         for i in self:
             if i_prev != i:
                 result.append(f'{i[0] + 1}->{i[1] + 1}')
+            i_prev = i
         return ', '.join(result)
 
 
