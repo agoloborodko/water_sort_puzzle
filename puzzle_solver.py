@@ -57,8 +57,11 @@ def is_solvable(vial_board):
     el_set = vial_board.get_set_of_items()
     if len(el_set) > len(vial_board):
         return False
-    else:
+
+    if check_each_el_fits_vial(vial_board):
         return True
+    else:
+        return False
 
 
 def check_each_el_fits_vial(vial_board):
