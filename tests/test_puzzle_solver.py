@@ -59,6 +59,25 @@ class TestSolver(unittest.TestCase):
     def test_solve_2(self):
         board = ps.VialBoard(
             [
+                [1, 2, 2, 1],
+                [2, 3, 5, 1],
+                [3, 3, 5, 4],
+                [1, 4, 4, 5],
+                [5, 2, 3, 4],
+                [],
+                []
+            ]
+        )
+        board_solved = ps.solve(board)
+        self.assertTrue(board_solved.solved())
+
+        print(board)
+        print(board_solved)
+        print(board_solved.path)
+
+    def test_solve_3(self):
+        board = ps.VialBoard(
+            [
                 [7, 5, 1, 11],
                 [8, 11, 3, 3],
                 [4, 9, 7, 1],
