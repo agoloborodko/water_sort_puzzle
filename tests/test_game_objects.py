@@ -11,6 +11,11 @@ class TestPath(unittest.TestCase):
         with self.assertRaises(AssertionError):
             p = obj.Path([(0, 1), (1, 2, 3)])
 
+    def test_init_empty(self):
+        p = obj.Path()
+        self.assertIsInstance(p, obj.Path)
+        self.assertEqual([], p)
+
     def test_str(self):
         p = obj.Path([(0, 1), (1, 2)])
         self.assertEqual('1->2, 2->3', p.__str__())

@@ -5,10 +5,11 @@ from exceptions import VialCannotAcceptThisException, VialIsFullException
 
 
 def validate_path(path):
-    assert isinstance(path, list), 'Path must be list type!'
-    for i in path:
-        assert isinstance(i, tuple), 'All path members must be tuples!'
-        assert len(i) == 2, 'All path tuples must be length of 2!'
+    if path is not None:
+        assert isinstance(path, list), 'Path must be list type!'
+        for i in path:
+            assert isinstance(i, tuple), 'All path members must be tuples!'
+            assert len(i) == 2, 'All path tuples must be length of 2!'
 
 
 class Path(UserList):
@@ -90,7 +91,7 @@ def reset_path(method):
     @wraps(method)
     def _impl(self, *method_args, **method_kwargs):
         method_output = method(self, *method_args, **method_kwargs)
-        self.path = []
+        self.path = Path()
         return method_output
     return _impl
 
@@ -141,7 +142,7 @@ def make_vials_from_lists(input_list):
 
 class VialBoard(UserList):
 
-    path = []
+    path = Path()
 
     @reset_path
     def __init__(self, vial_list):
