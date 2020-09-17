@@ -127,6 +127,19 @@ class TestSolver(unittest.TestCase):
         print(board_solved)
         print(board_solved.path)
 
+    def test_is_path_repeats(self):
+        path = [(0, 1), (1, 0), (0, 1), (1, 0)]
+        self.assertTrue(ps.is_path_repeats(path))
+
+        path = [(1, 2), (2, 3), (1, 3), (1, 2), (2, 3), (1, 3)]
+        self.assertTrue(ps.is_path_repeats(path))
+
+        path = [(1, 2), (1, 2), (2, 3), (1, 2), (2, 3), (1, 2), (2, 3)]
+        self.assertTrue(ps.is_path_repeats(path, 2))
+
+        path = [(1, 2), (2, 3), (1, 3), (1, 2), (2, 3), (1, 3)]
+        self.assertFalse(ps.is_path_repeats(path, 2))
+
     def test_unsolvable(self):
         board = ps.VialBoard(
             [

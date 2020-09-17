@@ -55,6 +55,9 @@ def solve_stack_deep(s):
                         return new_board
                     s.append(new_board)
 
+                    if len(s) % 1000 == 0 or len(new_board.path) % 1000 == 0:
+                        print(f'{len(s)}')
+
 
 def move_is_reasonable(vial_board, move):
     from_i = move[0]
@@ -72,6 +75,20 @@ def move_is_reasonable(vial_board, move):
             return False
 
     return True
+
+
+def is_path_repeats(path, depth=0):
+    assert depth >= 0
+    max_depth = len(path) // 2
+    if depth != 0:
+        max_depth = min(max_depth, depth)
+
+    for i in range(1, max_depth + 1):
+        last = path[-i:len(path)]
+        previous = path[-i*2:-i]
+        if last == previous:
+            return True
+    return False
 
 
 def solve_deep(vial_board):
