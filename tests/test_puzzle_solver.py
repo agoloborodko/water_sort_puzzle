@@ -184,6 +184,19 @@ class TestSolver(unittest.TestCase):
         self.assertFalse(ps.move_is_reasonable(board, (1, 3)))
         self.assertFalse(ps.move_is_reasonable(board, (2, 3)))
 
+    def test_move_is_reasonable_repeats(self):
+        board = ps.VialBoard(
+            [
+                [3],
+                [3, 3],
+                []
+            ]
+        )
+
+        self.assertTrue(ps.move_is_reasonable(board, (1, 0)))
+        board.move(1, 0)
+        self.assertFalse(ps.move_is_reasonable(board, (0, 1)))
+
 
 if __name__ == '__main__':
     unittest.main()

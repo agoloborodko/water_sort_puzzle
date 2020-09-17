@@ -76,6 +76,11 @@ def move_is_reasonable(vial_board, move):
     if len(set(vial_board[from_i])) == 1 and vial_board[to_i].is_empty():
         return False
 
+    path = vial_board.path
+    if len(path) > 0:
+        if path[-1] == (to_i, from_i):
+            return False
+
     return True
 
 
